@@ -1,51 +1,107 @@
 const column = ['30px', '90px', '150px', '210px', '270px', '320px', '390px', '450px', '510px'];
-const row = ['0px', '35px', '70px', '100px', '130px', '160px'];
-var holdenPosition = 0;
+const row = ['0px', '35px', '70px', '100px', '130px', '160px','200px'];
+var holdenPosition = 3;
 var gameEnd = false;
 
 var child = ['child0','child1','child2','child3','child4'];
 var childRow = [0,0,0,0,0];
 var childColumn = [0,0,0,0,0];
 // can be used to set when child enter game.
-var childTimeout = [0,5,10,15,20];
+var childTimeout = [0,12,24,36,45];
+// progress bar values
+var SaveBar = 0;
+var DeadBar = 0;
 
-
+// Function that runs on start
 function main(){
+  // Hide start button and background
+  document.getElementById("StartButton").style.display = "none";
+  document.getElementById("GameTitle").style.display = "none";
   var foo = setInterval(function(){
+    // stops the time loop
     if(gameEnd) clearInterval(foo);
     // game code per interval called here.
     for(var i=0; i<child.length; i++){
       if(childTimeout[i] < 1 && childRow[i] < 5){
         childRun(i);
       }
-      if(childColumn[i] == holdenPosition && childRow[i] == 4){
-        resetChildPos(i)
-      } else if(childRow[i] == 4){
-        document.getElementById(child[i]).style.display = "none";
+      if(childColumn[i] == holdenPosition && childRow[i] == 5){
+        resetChildPos(i);
+        SaveBar = SaveBar + 5;
+        // Check game score to see if player won
+        if(SaveBar >= 100){
+          gameEnd = true;
+          document.getElementById("GameWon").style.display = "block";
+          document.getElementById("RestartButton").style.display = "block";
+        }
+        if(SaveBar <= 100){
+          document.getElementById("SaveBar").style.width = SaveBar + "%";
+        }
+      } else if(childRow[i] == 5){
+        // when child gets falls
+        childRun(i);
+        document.getElementById(child[i]).src = "images/falling.png";
+      } else if(childRow[i] == 6){
+        if(document.getElementById(child[i]).style.display != "none"){
+          DeadBar = DeadBar + 20;
+          // Check game score to see if player lost
+          if(DeadBar >= 100){
+            gameEnd = true;
+            document.getElementById("GameOver").style.display = "block";
+            document.getElementById("RestartButton").style.display = "block";
+          }
+          if(DeadBar <= 100){
+            document.getElementById("DeadBar").style.width = DeadBar + "%";
+          }
+          document.getElementById(child[i]).src = "images/child.gif";
+          resetChildPos(i);
+        }
+
       }
 
 
       childTimeout[i] = childTimeout[i] - 1;
     }
-
-
   }, 1000);
 }
 
-// on start button click run start script
-function start(){
-  gameRunning = true;
-  var i = 0;
-  while(gameRunning){
-    i = i + 1;
-    sleep(200);
-    console.log(document.getElementById('child0'));
-    childRun(document.getElementById('child0'), i);
-    if(i==5){
-      gameRunning = false;
-    }
+
+
+function restart(){
+  gameEnd = false;
+  childRow = [0,0,0,0,0];
+  childColumn = [0,0,0,0,0];
+  childTimeout = [0,12,24,36,45];
+  SaveBar = 0;
+  DeadBar = 0;
+  document.getElementById("GameOver").style.display = "none";
+  document.getElementById("GameWon").style.display = "none";
+  document.getElementById("RestartButton").style.display = "none";
+  for(var i=0; i<child.length; i++){
+    document.getElementById(child[i]).style.top = row[0];
+    document.getElementById(child[i]).style.left = column[0];
   }
+  document.getElementById("DeadBar").style.width = DeadBar + "%";
+  document.getElementById("SaveBar").style.width = SaveBar + "%";
+  main()
 }
+
+// on start button click run start script
+// function start(){
+//   gameRunning = true;
+//   var i = 0;
+//   while(gameRunning){
+//     i = i + 1;
+//     sleep(200);
+//     console.log(document.getElementById('child0'));
+//     childRun(document.getElementById('child0'), i);
+//     if(i==5){
+//       gameRunning = false;
+//     }
+//   }
+// }
+
+
 
 
 
