@@ -9,13 +9,65 @@
       height: 300px;
       width: 600px;
     }
+    #score {
+      left: 0px;
+      position: relative;
+      height: 100px;
+      width: 598px;
+      border: 2px solid;
+    }
+    #Progress {
+      width: 100%;
+      background-color: #ddd;
+    }
+    #SaveBar {
+      width: 0%;
+      height: 30px;
+      background-color: blue;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+    }
+    #DeadBar {
+      width: 0%;
+      height: 30px;
+      background-color: red;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+    }
+    .StartButton {
+      text-align: center;
+     display: inline-block;
+     margin:5px;
+     font-weight: bold;
+     padding: 10px 10px 10px 10px ;
+     background-color: lightgray;
+     text-shadow: -1px -1px black, 1px 1px white;
+     color: gray;
+     -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+     -o-border-radius: 7px;
+     border-radius: 7px;
+     box-shadow: 0 .2em gray;
+     cursor: pointer;
+     z-index: 120;
+     position: absolute;
+     left: 250px;
+     top: 200px
+    }
     </style>
-    <script src="script.js"></script>
+    <script src="main1.js"></script>
   </head>
   <body>
     <h1>Holden CaughSyrup</h1>
     <div id="frame">
+      <button class="StartButton" id="StartButton" onclick="main()">START</button>
+      <button class="StartButton" id="RestartButton" onclick="restart()" style="display:none;">RESTART</button>
       <img style="left: 0px; top: 0px; position: absolute;  z-index: -1;" src="images/background.png">
+      <img id="GameTitle" style="left: 0px; top: 0px; position: absolute;  z-index: 101; display:block;" src="images/Title.png">
+      <img id="GameOver" style="left: 0px; top: 0px; position: absolute;  z-index: 101; display:none;" src="images/GameOver.png">
+      <img id="GameWon" style="left: 0px; top: 0px; position: absolute;  z-index: 101; display:none;" src="images/GameWon.png">
       <img style="left: 10px; top: 0px; position: absolute;  z-index: 0;" src="images/wheat.gif">
       <img style="left: 17px; top: 30px; position: absolute;  z-index: 1;" src="images/wheat.gif">
       <img style="left: 10px; top: 60px; position: absolute;  z-index: 2;" src="images/wheat.gif">
@@ -23,13 +75,22 @@
       <img style="left: 10px; top: 120px; position: absolute; z-index: 4;" src="images/wheat.gif">
       <img style="left: 17px; top: 150px; position: absolute;  z-index: 5;" src="images/wheat.gif">
       <!-- Changing variables -->
-      <img id='holden' style="left: 200px; top: 160px; position: absolute; z-index: 100;" src="images/Holden.gif">
-      <img id='child0' style="left: 0px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
-      <img id='child1' style="left: 0px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
-      <img id='child2' style="left: 0px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
-      <img id='child3' style="left: 0px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
-      <img id='child4' style="left: 0px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
+      <img id='holden' style="left: 210px; top: 160px; position: absolute; z-index: 100;" src="images/Holden.gif">
+      <img id='child0' style="left: 30px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
+      <img id='child1' style="left: 30px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
+      <img id='child2' style="left: 30px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
+      <img id='child3' style="left: 30px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
+      <img id='child4' style="left: 30px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
     </div>
-    <button onclick="main()">Start</button>
+    <div id="score">
+      <span>Saved:</span><div id="Progress">
+        <div id="SaveBar"></div>
+      </div>
+      <span>Deathes:</span><div id="Progress">
+        <div id="DeadBar"></div>
+      </div>
+    </div><br>
+    <p>Directions: Use A to move left and D to move Right</p>
+    <p>Stop the children from falling off the clif by blocking their path.</p>
   </body>
 </html>
