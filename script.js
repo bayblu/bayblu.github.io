@@ -80,6 +80,7 @@ function restart(){
   for(var i=0; i<child.length; i++){
     document.getElementById(child[i]).style.top = row[0];
     document.getElementById(child[i]).style.left = column[0];
+    document.getElementById(child[i]).src = "images/child.gif";
   }
   document.getElementById("DeadBar").style.width = DeadBar + "%";
   document.getElementById("SaveBar").style.width = SaveBar + "%";
