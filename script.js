@@ -23,7 +23,12 @@ function main(){
     // game code per interval called here.
     for(var i=0; i<child.length; i++){
       if(childTimeout[i] < 1 && childRow[i] < 5){
-        childRun(i);
+        // make sure there aren't two in the same row
+        if (childRow[i] == 0 || childRow.filter(item => item == childRow[i]).length == 1){
+          childRun(i);
+        } else {
+          resetChildPos(i)
+        }
       }
       if(childColumn[i] == holdenPosition && childRow[i] == 5){
         resetChildPos(i);
@@ -141,4 +146,8 @@ function childRun(childInt){
   element.style.top = row[childRow[childInt]];
   var index = element.style.zIndex;
   element.style.zIndex = parseInt(index) + 1;
+}
+
+function zoom() {
+  document.body.style.zoom = "140%"
 }

@@ -66,11 +66,12 @@
      left: 250px;
      top: 200px
     }
+    
     </style>
     <script src="script.js"></script>
   </head>
-  <body>
-    <h1>Holden CaughSyrup</h1>
+  <body onload="zoom()">
+    <!-- <h1>Holden CaughSyrup</h1> -->
     <div id="frame">
       <button class="StartButton" id="StartButton" onclick="main()">START</button>
       <button class="StartButton" id="RestartButton" onclick="restart()" style="display:none;">RESTART</button>
@@ -84,6 +85,7 @@
       <img style="left: 17px; top: 90px; position: absolute;  z-index: 3;" src="images/wheat.gif">
       <img style="left: 10px; top: 120px; position: absolute; z-index: 4;" src="images/wheat.gif">
       <img style="left: 17px; top: 150px; position: absolute;  z-index: 5;" src="images/wheat.gif">
+      <img style="left: 17px; top: 0px; position: absolute;  z-index: 1;" src="images/Cabin.png">
       <!-- Changing variables -->
       <img id='holden' style="left: 210px; top: 160px; position: absolute; z-index: 100;" src="images/Holden.gif">
       <img id='child0' style="left: 30px; top: 0px; position: absolute; z-index: 0;" src="images/child.gif">
